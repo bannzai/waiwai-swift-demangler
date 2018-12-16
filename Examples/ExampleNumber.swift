@@ -1,3 +1,3 @@
-func isEven(number: Int, hoge: String, fuga: Float) -> Bool {
+func isEven(number: Int) throws -> Bool {
     return number % 2 == 0
 }
