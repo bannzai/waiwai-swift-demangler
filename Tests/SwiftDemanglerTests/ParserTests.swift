@@ -23,6 +23,10 @@ class ParserTests: XCTestCase {
             static let mangled = "$S13ExampleNumber6isEven6numberSbSi_tF"
             static let noPrefixMangled = "13ExampleNumber6isEven6numberSbSi_tF"
         }
+        
+        struct Step2 {
+            static let mangled = "$S13ExampleNumber6isEven6numberSbSi_tKF"
+        }
     }
 
     func testParseInt() {
@@ -120,12 +124,36 @@ class ParserTests: XCTestCase {
     }
     
     func testParseFunctionEntity() {
-        let sig = FunctionSignature(returnType: .bool, argsType: .list([.int]))
-        XCTAssertEqual(Parser(name: "13ExampleNumber6isEven6numberSbSi_tF").parseFunctionEntity(),
-                       FunctionEntity(module: "ExampleNumber", declName: "isEven", labelList: ["number"], functionSignature: sig))
+//        do {
+//            let sig = FunctionSignature(returnType: .bool, argsType: .list([.int]))
+//            XCTAssertEqual(
+//                Parser(name: Const.Step1.mangled).parseFunctionEntity(),
+//                FunctionEntity(
+//                    module: "ExampleNumber",
+//                    declName: "isEven",
+//                    labelList: ["number"],
+//                    functionSignature: sig,
+//                    functionAnnotationKeyword: nil
+//                )
+//            )
+//        }
+        
+        do {
+            let sig = FunctionSignature(returnType: .bool, argsType: .list([.int]))
+            XCTAssertEqual(
+                Parser(name: Const.Step2.mangled).parseFunctionEntity(),
+                FunctionEntity(
+                    module: "ExampleNumber",
+                    declName: "isEven",
+                    labelList: ["number"],
+                    functionSignature: sig,
+                    functionAnnotationKeyword: "throws"
+                )
+            )
+        }
     }
     
-    
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

@@ -43,6 +43,10 @@ struct Printer {
         
         let retType = typeName(type: parsed.functionSignature.returnType)
         
+        if let annotation = parsed.functionAnnotationKeyword {
+            output += " \(annotation)"
+        }
+        
         output += " -> " + retType
         return output
     }

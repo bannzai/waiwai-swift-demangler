@@ -178,6 +178,21 @@ extension Parser {
     }
 }
 
+extension Parser {
+    func hasThrow() -> Bool {
+        return peek() == "K"
+    }
+    
+    func parseThrow() -> String? {
+        if !hasThrow() {
+            return nil
+        }
+        
+        skip(length: 1)
+        return "throws"
+    }
+}
+
 
 extension Parser {
     func parseFunctionEntity() -> FunctionEntity {
@@ -185,7 +200,8 @@ extension Parser {
             module: parseModule(),
             declName: parseDeclName()!,
             labelList: parseLabelList(),
-            functionSignature: parseFunctionSignature()
+            functionSignature: parseFunctionSignature(),
+            functionAnnotationKeyword: parseThrow()
         )
     }
 }

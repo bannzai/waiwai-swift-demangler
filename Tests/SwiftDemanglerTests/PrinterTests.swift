@@ -17,6 +17,12 @@ class PrinterTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testPrint_NoTest() {
+        
+        let printer = Printer(parser: Parser(name: "$S13ExampleNumber6isEven6number4hoge4fugaSbSi_SSSftF"))
+        print(printer.output())
+    }
 
     func testPrinter() {
         let printer = Printer(parser: Parser(name: "$S13ExampleNumber6isEven6numberSbSi_tF"))
